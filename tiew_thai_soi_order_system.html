@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>เตี๋ยวท้ายซอย @ อยู่สุข34 | รับออเดอร์</title>
+<style>
+:root{--red:#b9252d;--dark:#251c17;--cream:#fff8ee;--line:#eaded0;--gold:#e9b84e}
+*{box-sizing:border-box}body{margin:0;background:#f5eee5;color:#30251f;font-family:system-ui,-apple-system,"Noto Sans Thai",sans-serif}
+header{background:linear-gradient(120deg,#241711,#4b2a19);color:#fff;padding:20px 16px;text-align:center;border-bottom:5px solid var(--gold)}
+header h1{margin:0;font-size:clamp(23px,5vw,34px)}header p{margin:4px 0 0;color:#ffe1a0}
+main{max-width:1000px;margin:auto;padding:14px;display:grid;grid-template-columns:minmax(0,1.5fr) minmax(280px,1fr);gap:14px}
+.panel{background:#fffdf9;border:1px solid var(--line);border-radius:16px;padding:14px;box-shadow:0 3px 12px #3820150d}
+h2{font-size:20px;margin:0 0 12px}.sub{font-size:13px;color:#78695e;margin-top:-6px}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.menu{border:1px solid var(--line);border-radius:12px;padding:11px;background:#fff;cursor:pointer;text-align:left;color:inherit;min-height:74px}
+.menu:active{transform:scale(.99)}.menu strong{display:block;font-size:15px}.menu small{display:block;color:#76675b;margin-top:3px}.price{color:var(--red);font-weight:800}
+.menu.selected{border:2px solid var(--red);background:#fff4f2}
+.pills{display:flex;gap:7px;flex-wrap:wrap}.pill{border:1px solid #d8c8b9;border-radius:9px;padding:9px 11px;background:white;cursor:pointer;font:inherit}.pill.active{background:var(--red);color:#fff;border-color:var(--red)}
+.field{margin:13px 0}.field label,.label{display:block;font-weight:700;margin-bottom:7px}.hint{font-size:12px;color:#77685c;font-weight:400}
+select,input,textarea{font:inherit;border:1px solid #d8c8b9;border-radius:9px;padding:10px;background:white;width:100%;color:#30251f}
+textarea{min-height:76px;resize:vertical}
+.checks{display:flex;gap:8px;flex-wrap:wrap}.checks label{border:1px solid #e2d5c8;padding:8px 10px;border-radius:9px;background:white;font-weight:400;margin:0}
+.checks input{width:auto;accent-color:var(--red)}
+.addonrow{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:9px 0;border-bottom:1px solid #f0e6dc}.qty{display:flex;align-items:center;gap:9px}.qty button{border:1px solid var(--line);background:#fff;border-radius:8px;width:30px;height:30px;font-size:18px}
+.primary{width:100%;background:var(--red);color:#fff;border:0;border-radius:11px;padding:13px;font:inherit;font-weight:800;cursor:pointer;margin-top:12px}
+.secondary{background:#fff;border:1px solid var(--line);border-radius:9px;padding:9px 12px;font:inherit;cursor:pointer}
+.cartitem{padding:12px 0;border-bottom:1px solid var(--line)}.cartitem h3{margin:0;font-size:15px}.cartitem p{margin:3px 0;color:#74665b;font-size:13px}.cartfoot{display:flex;justify-content:space-between;align-items:center;font-size:18px;font-weight:800;margin-top:14px}
+.empty{color:#897a6e;text-align:center;padding:25px 0}.order{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px;margin:9px 0}.orderhead{display:flex;justify-content:space-between;font-weight:800}.status{font-size:12px;color:#8b4c13;background:#fff0d5;border-radius:20px;padding:4px 8px}.order ul{margin:8px 0;padding-left:20px;font-size:13px}
+footer{text-align:center;color:#78695e;padding:8px 15px 24px;font-size:12px}
+@media(max-width:720px){main{grid-template-columns:1fr;padding:10px}.grid{grid-template-columns:1fr 1fr}.panel{padding:12px}header{padding:17px 10px}}
+@media(max-width:370px){.grid{grid-template-columns:1fr}}
+</style></head>
+<body>
+<header><h1>🍜 เตี๋ยวท้ายซอย</h1><p>@ อยู่สุข34 · ระบบรับออเดอร์หน้าร้าน</p></header>
+<main>
+<section class="panel">
+<h2>เลือกเมนู</h2><p class="sub">แตะเมนูเพื่อปรับแต่งก่อนเพิ่มลงออเดอร์</p>
+<div class="grid" id="menu"></div>
+<div class="field"><span class="label">ขนาด</span><div class="pills" id="size"><button class="pill active" data-v="ธรรมดา">ธรรมดา</button><button class="pill" data-v="พิเศษ">พิเศษ</button></div></div>
+<div class="field" id="styleField"><span class="label">รูปแบบต้มยำ <span class="hint">(สำหรับเมนูต้มยำ)</span></span><div class="pills" id="soupstyle"><button class="pill active" data-v="ยำน้ำ">ยำน้ำ</button><button class="pill" data-v="ยำแห้ง">ยำแห้ง</button></div></div>
+<div class="field" id="noodleField"><span class="label">เลือกเส้น <span class="hint">(ก๋วยเตี๋ยวเท่านั้น)</span></span><div class="pills" id="noodles"></div></div>
+<div class="field"><span class="label">ผัก</span><div class="pills" id="veg"><button class="pill active" data-v="ถั่วงอก + ผักบุ้ง">ทั้ง 2 อย่าง</button><button class="pill" data-v="ถั่วงอก">ถั่วงอก</button><button class="pill" data-v="ผักบุ้ง">ผักบุ้ง</button><button class="pill" data-v="ไม่ใส่ผัก">ไม่ใส่ผัก</button></div></div>
+<div class="field"><span class="label">เพิ่มไข่ต้ม</span><div class="qty"><button onclick="changeEgg(-1)">−</button><strong id="eggCount">0</strong><span>ฟอง · 7 บาท/ฟอง</span><button onclick="changeEgg(1)">+</button></div></div>
+<div class="field"><span class="label">เครื่องเคียงและเครื่องดื่ม</span><div id="extras"></div></div>
+<div class="field"><label for="note">หมายเหตุ / แพ้วัตถุดิบ / ไม่ใส่เครื่อง</label><textarea id="note" placeholder="เช่น แพ้ถั่ว ไม่ใส่ต้นหอม ไม่ใส่ลูกชิ้น แยกน้ำซุป..."></textarea></div>
+<div class="field"><label for="table">โต๊ะ / ชื่อลูกค้า (ถ้ามี)</label><input id="table" placeholder="เช่น โต๊ะ 3 หรือ คุณเอ"></div>
+<button class="primary" onclick="addOrder()">＋ เพิ่มรายการลงออเดอร์</button>
+</section>
+<aside>
+<section class="panel">
+<h2>🧾 ออเดอร์ปัจจุบัน</h2><div id="cart"><div class="empty">ยังไม่มีรายการ<br>เลือกเมนูทางซ้ายเพื่อเริ่มรับออเดอร์</div></div>
+<div class="cartfoot"><span>รวมทั้งหมด</span><span id="total">0 บาท</span></div>
+<button class="primary" onclick="checkout()">ยืนยันออเดอร์ / ออกเลขคิว</button>
+<button class="secondary" style="width:100%;margin-top:8px" onclick="clearCart()">ล้างออเดอร์ปัจจุบัน</button>
+</section>
+<section class="panel" style="margin-top:14px"><h2>📋 คิวที่รับแล้ว</h2><div id="orders"><div class="empty">ยังไม่มีคิว</div></div><button class="secondary" onclick="clearOrders()">ล้างรายการคิวในหน้านี้</button></section>
+</aside>
+</main><footer>ต้นแบบใช้งานบนอุปกรณ์นี้ · ข้อมูลคิวจะหายเมื่อรีเฟรชหน้าเว็บ · ยังไม่ได้เชื่อมฐานข้อมูลหรือเครื่องพิมพ์</footer>
+<script>
+const dishes=[
+{id:'ก๋วยเตี๋ยวต้มยำโบราณ',kind:'noodle',price:40,tomyam:true},
+{id:'ก๋วยเตี๋ยวน้ำใส',kind:'noodle',price:40},
+{id:'ก๋วยเตี๋ยวเย็นตาโฟ',kind:'noodle',price:40},
+{id:'ก๋วยเตี๋ยวเย็นตาโฟต้มยำ',kind:'noodle',price:40,tomyam:true},
+{id:'เกาเหลาต้มยำ',kind:'bowl',price:50,tomyam:true},
+{id:'เกาเหลาน้ำใส',kind:'bowl',price:50},
+{id:'เกาเหลาเย็นตาโฟ',kind:'bowl',price:50},
+{id:'เกาเหลาเย็นตาโฟต้มยำ',kind:'bowl',price:50,tomyam:true}
+];
+const noodles=['เส้นเล็ก','เส้นใหญ่','เส้นหมี่','เส้นบะหมี่กลม','เส้นบะหมี่แบน','วุ้นเส้น','มาม่า'];
+const extras=[['เกี๊ยวทอด',5],['แคบหมู',10],['เป๊ปซี่ขวดเล็ก',15],['เป๊ปซี่ขวดใหญ่',30]];
+let selected=dishes[0],size='ธรรมดา',soup='ยำน้ำ',veg='ถั่วงอก + ผักบุ้ง',egg=0,cart=[],queue=[],nextQueue=1,extraQty={};
+const $=id=>document.getElementById(id);
+function renderMenu(){$('menu').innerHTML=dishes.map((d,i)=>`<button class="menu ${selected.id===d.id?'selected':''}" onclick="chooseDish(${i})"><strong>${d.id}</strong><small>${d.tomyam?'เลือกยำน้ำ / ยำแห้งได้':'น้ำใส / ไม่ยำ'}</small><span class="price">${d.price} / ${d.price+10} บาท</span></button>`).join('')}
+function chooseDish(i){selected=dishes[i];renderMenu();$('styleField').style.display=selected.tomyam?'block':'none';$('noodleField').style.display=selected.kind==='noodle'?'block':'none';}
+$('noodles').innerHTML=noodles.map((n,i)=>`<button class="pill ${i===0?'active':''}" data-v="${n}">${n}</button>`).join('');
+function activateGroup(id,callback){$(id).addEventListener('click',e=>{let b=e.target.closest('button');if(!b)return;$(id).querySelectorAll('button').forEach(x=>x.classList.remove('active'));b.classList.add('active');callback(b.dataset.v)})}
+activateGroup('size',v=>size=v);activateGroup('soupstyle',v=>soup=v);activateGroup('veg',v=>veg=v);
+activateGroup('noodles',v=>{});
+$('extras').innerHTML=extras.map(([name,price])=>`<div class="addonrow"><span>${name} <small class="price">${price} บาท</small></span><div class="qty"><button onclick="changeExtra('${name}',-1)">−</button><strong id="ex-${name}">0</strong><button onclick="changeExtra('${name}',1)">+</button></div></div>`).join('');
+function changeEgg(n){egg=Math.max(0,egg+n);$('eggCount').textContent=egg}
+function changeExtra(name,n){extraQty[name]=Math.max(0,(extraQty[name]||0)+n);$('ex-'+name).textContent=extraQty[name]}
+function activeNoodle(){return $('noodles').querySelector('.active')?.dataset.v||noodles[0]}
+function addOrder(){
+ let price=selected.price+(size==='พิเศษ'?10:0),opts=[];
+ if(selected.kind==='noodle')opts.push(activeNoodle());
+ if(selected.tomyam)opts.push(soup);
+ opts.push('ผัก: '+veg);
+ if(egg)opts.push('ไข่ต้ม '+egg+' ฟอง');
+ const note=$('note').value.trim(),table=$('table').value.trim();
+ cart.push({name:selected.id,size,price,opts,note,table,qty:1});
+ extras.forEach(([name,p])=>{if(extraQty[name])cart.push({name,price:p,qty:extraQty[name],opts:[],note:'',table,side:true})});
+ egg=0;$('eggCount').textContent='0';extraQty={};extras.forEach(([n])=>$('ex-'+n).textContent='0');$('note').value='';
+ renderCart();
+}
+function renderCart(){
+ if(!cart.length){$('cart').innerHTML='<div class="empty">ยังไม่มีรายการ</div>'}else{$('cart').innerHTML=cart.map((x,i)=>`<div class="cartitem"><h3>${x.name} ${x.size||''} × ${x.qty}</h3><p>${(x.opts||[]).join(' · ')}</p>${x.note?`<p>หมายเหตุ: ${esc(x.note)}</p>`:''}${x.table?`<p>${esc(x.table)}</p>`:''}<div style="display:flex;justify-content:space-between;align-items:center"><b>${x.price*x.qty} บาท</b><button class="secondary" onclick="removeItem(${i})">ลบ</button></div></div>`).join('')}
+ $('total').textContent=cart.reduce((s,x)=>s+x.price*x.qty,0)+' บาท';
+}
+function removeItem(i){cart.splice(i,1);renderCart()}
+function clearCart(){cart=[];renderCart()}
+function checkout(){if(!cart.length){alert('กรุณาเพิ่มรายการก่อนยืนยันออเดอร์');return}let order={id:nextQueue++,items:cart.map(x=>({...x})),total:cart.reduce((s,x)=>s+x.price*x.qty,0),table:$('table').value.trim(),status:'รอทำ'};queue.unshift(order);cart=[];renderCart();renderOrders();alert('รับออเดอร์แล้ว คิว #'+String(order.id).padStart(3,'0'))}
+function renderOrders(){if(!queue.length){$('orders').innerHTML='<div class="empty">ยังไม่มีคิว</div>';return}$('orders').innerHTML=queue.map((o,i)=>`<div class="order"><div class="orderhead"><span>คิว #${String(o.id).padStart(3,'0')} ${o.table?'· '+esc(o.table):''}</span><span>${o.total} บาท</span></div><span class="status">${o.status}</span><ul>${o.items.map(x=>`<li>${esc(x.name)} ${x.size||''} × ${x.qty}${x.opts?.length?' — '+esc(x.opts.join(', ')):''}${x.note?' (หมายเหตุ: '+esc(x.note)+')':''}</li>`).join('')}</ul><button class="secondary" onclick="setStatus(${i})">เปลี่ยนสถานะ</button></div>`).join('')}
+function setStatus(i){let statuses=['รอทำ','กำลังทำ','เสร็จแล้ว'];queue[i].status=statuses[(statuses.indexOf(queue[i].status)+1)%statuses.length];renderOrders()}
+function clearOrders(){if(confirm('ล้างคิวทั้งหมดในหน้านี้?')){queue=[];nextQueue=1;renderOrders()}}
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+chooseDish(0);renderMenu();renderCart();
+</script></body></html>
